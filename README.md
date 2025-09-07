@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📌 Next.js Auth Template
 
-## Getting Started
+A **session-based authentication template** built with **Next.js 15 (App Router)** and **TypeScript**.  
+Designed to be reusable and extendable for any project that needs a clean, production-ready auth setup.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🔑 **Session-based authentication** (Redis-backed for fast lookups, edge-compatible with Upstash)
+- ⚡ **Full TypeScript support**
+- 🎨 **Shadcn-UI compatible** components
+- ✅ **Zod validation** for forms
+- 🔄 **Server Actions** for secure server-side logic
+- 🎯 **Client-side form error handling** with `useActionState`
+- 🎬 **View Transitions** for smooth page navigation
+- 🛡️ **Middleware-based route protection** (public & protected routes)
+- 🗄️ **Postgres + Redis integration** for persistence and speed
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+app/
+  (protected)/...          # Protected routes (require auth)
+  (public)/
+    sign-in                # Sign-in page
+    sign-up                # Sign-up page
+
+lib/
+  actions/auth.action.ts   # Authentication server actions
+  auth/session.ts          # Session handling logic
+  components/ui/...        # UI components (shadcn-ready)
+  db/
+    postgres.ts            # PostgreSQL connection
+    redis.ts               # Redis connection (Upstash)
+    schema.sql             # SQL schema
+  types/auth.types.ts      # Auth-related types
+  utils.ts                 # Utility functions
+
+middleware.ts              # Handling permissions (auth)
+___
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1.Clone this repo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone https://github.com/your-username/nextjs-auth-template.git
+cd nextjs-auth-template
+```
 
-## Learn More
+### 2.Install dependencies
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm install   # or npm/yarn
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3.Set up environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+DB_CONNECT_STRING=your_postgres_url
+REDIS_URL=your_upstash_redis_url
+REDIS_TOKEN=your_upstach_redis_token
+```
 
-## Deploy on Vercel
+### 4.Run database schema
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+psql < lib/db/schema.sql
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+
+### 5.Start the dev server
+
+```bash
+pnpm dev
+
+```
+
+## 📜 License
+
+This project is licensed under the **MIT License** – free to use, modify, and share.
